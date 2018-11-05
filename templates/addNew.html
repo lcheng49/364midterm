@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<form action="/getBrew" method="POST">
+	{{ form.hidden_tag() }}
+    {{ form.name.label() }}{{ form.name() }}<br>
+    {{ form.brewery.label() }}{{ form.brewery() }}<br>
+    {{ form.submit() }}
+</form>
+
+<div>
+	{% for x in get_flashed_messages() %}
+	<b>Errors:</b><br><br>
+	    {% for key in x %}
+	        * <b>{{ key }}</b> - <i> {{ x[key][0] }}</i> <br>
+	    {% endfor %}
+	{% endfor %}
+</div>
+{% endblock %}

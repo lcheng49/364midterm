@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>List of all Users and Breweries</h1>
+
+<ul>
+{% for x in full_list %}
+    <li>{{ x[0] }} -- {{ x[1] }}</li>
+{% endfor %}
+</ul>
+
+{% endblock %}
