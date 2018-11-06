@@ -1,25 +1,14 @@
-# Homework 1 - SI 364 F18
+This is an application that allows users to input their favorite Breweries.
+The same user can add multiple breweries. 
+They can also search up breweries and get information about them.
+Finally, users can suggest breweries that aren’t currently in the database that they think should be added.
 
-## DEADLINE: Sunday September 16, 2018 at 11:59 PM
 
-## Instructions
+Routes
 
-See inside the `SI364W18_HW1.py` file for details about the four problems to complete in this assignment.
-
-When you are done, there should be at least these 5 routes that work in the Flask app in `SI364W18_HW1.py`:
-
-* `/` (works in the provided code; should not change)
-* `/class` (from Problem 1)
-* `/movie/<anytitlesearch>` (from Problem 2)
-* `/question` (from Problem 3)
-* `/problem4form` (from Problem 4)
-
-There may be 1 or 2 more, depending upon how you decide to handle Problems 2-4, but you only need these five working correctly and following all requirements to succeed at completing this homework assignment.
-
-## To complete the assignment and submit
-
-Fork this repository.
-
-To work on it, clone the repository and make edits and commits. Push them to your clone of the repository.
-
-Submit the link to YOUR repository clone to the assignment for **HW 1** on the SI 364 Canvas site.
+http://localhost:5000/ -> base.html —- Home Page
+http://localhost:5000/addNew -> addNew.html —- Page for users to enter a name and brewery. On Submit, it brings the user to either brew.html or nonexist.html
+http://localhost:5000/nonExist -> nonexist.html —- Page that appears when users enter a brewery that is not in the API. This page only appears if a invalid input is presented
+http://localhost:5000/giveAdvice -> advice.html —- Page that allows users to enter a suggestion of a new brewery to add to the database/api. This page redirects back to itself upon successful entry. 
+http://localhost:5000/showAll -> name.html —- Page outputs all user and brewery combinations as well as all suggestions.
+http://localhost:5000/getBrew —> brew.html —- page that gives brewery info to user. Only appears when users submits brewery from addNew. If entered normally it redirects to addNew

@@ -39,7 +39,6 @@ class Brewery(db.Model):
     brewery = db.Column(db.String(140))
     name_id = db.Column(db.Integer, db.ForeignKey('name.id'))
 
-
 class Name(db.Model):
     __tablename__ = "name"
     id = db.Column(db.Integer,primary_key=True)
@@ -52,10 +51,6 @@ class Advice(db.Model):
     newbrew = db.Column(db.String(64))
     newbrewtype = db.Column(db.String(64))
     newbrewloc = db.Column(db.String(65))
-
-
-
-
 
 
 ###################
@@ -126,15 +121,16 @@ def brew():
         res = requests.get('https://api.openbrewerydb.org/breweries?by_name={}'.format(brewery_name))
         dic = json.loads(res.text)
         if len(dic) == 0:
-            print("OH NO")
             return redirect(url_for('nonexist'))
         return render_template('brew.html', name = name, brewname = brewery_name, state = dic[0]['state'], type = dic[0]['brewery_type'], phone = dic[0]['phone'])
 
     flash(form.errors)
     return redirect(url_for('add'))
+
 @app.route('/nonExist')
 def nonexist():
     return render_template('nonexist.html')
+    
 @app.route('/showAll')
 def showAll():
     breweries = Brewery.query.all()
