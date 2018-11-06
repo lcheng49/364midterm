@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<form action="/adviceDB" method="POST">
+	{{ form.hidden_tag() }}
+    {{ form.brew.label() }}{{ form.brew() }}<br>
+    {{ form.type.label() }}{{ form.type() }}<br>
+		{{ form.state.label() }}{{ form.state() }}<br>
+    {{ form.submit() }}
+</form>
+
+<div>
+	{% for x in get_flashed_messages() %}
+	<b></b><br><br>
+	    {% for key in x %}
+	        * <b>{{ key }}</b> - <i> {{ x[key][0] }}</i> <br>
+	    {% endfor %}
+	{% endfor %}
+</div>
+{% endblock %}

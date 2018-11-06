@@ -46,6 +46,14 @@ class Name(db.Model):
     name = db.Column(db.String(64))
     brewery = db.relationship('Brewery', backref=db.backref('Name', lazy = True))
 
+class Advice(db.Model):
+    __tablename__ = "advice"
+    id = db.Column(db.Integer,primary_key=True)
+    newbrew = db.Column(db.String(64))
+    newbrewtype = db.Column(db.String(64))
+    newbrewloc = db.Column(db.String(65))
+
+
 
 
 
@@ -62,7 +70,11 @@ class BrewForm(FlaskForm):
             raise ValidationError('First letter must be capitalized')
     submit = SubmitField("Submit")
 
-
+class AdviceForm(FlaskForm):
+    brew = StringField("Please suggest a brewery",validators=[InputRequired()])
+    type = StringField("Please input brewery type",validators=[InputRequired()])
+    state = StringField("Please input the State the brewery is in",validators=[InputRequired()])
+    submit = SubmitField("Submit")
 
 #######################
 ###### VIEW FXNS ######
@@ -99,7 +111,6 @@ def brew():
                 brewbool = 1
             if user.name == name and x.brewery == brewery_name:
                 dup = 1
-        print(brewbool, namebool, dup)
         if dup != 1:
             if namebool == 0:
                 user = Name(name=name)
@@ -124,12 +135,30 @@ def showAll():
     breweries = Brewery.query.all()
     final = []
     for x in breweries:
-
         user = Name.query.filter_by(id=x.name_id).first()
         tup = (user.name, x.brewery)
         final.append(tup)
     return render_template('name.html',full_list = final)
 
+@app.route('/giveAdvice')
+def advice():
+    form = AdviceForm()
+    brew = form.brew.data
+    type = form.type.data
+    state = form.state.data
+    return render_template('advice.html',form=form)
+
+@app.route('/adviceDB', methods = ['GET','POST'])
+def advicedb():
+    form = AdviceForm(request.form)
+    if form.validate_on_submit():
+        brew = form.brew.data
+        type = form.type.data
+        state = form.state.data
+        advice = Advice(newbrew = brew, newbrewtype = type, newbrewloc = state)
+        db.session.add(advice)
+        db.session.commit()
+    return redirect(url_for('advice'))
 
 @app.errorhandler(404)
 def page_not_found(e):
