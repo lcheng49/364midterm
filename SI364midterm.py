@@ -107,7 +107,9 @@ def brew():
             if user.name == name and x.brewery == brewery_name:
                 dup = 1
         if dup != 1:
-            if namebool == 0:
+            if len(name) == 0:
+                pass
+            elif namebool == 0:
                 user = Name(name=name)
                 db.session.add(user)
                 db.session.commit()
@@ -130,7 +132,7 @@ def brew():
 @app.route('/nonExist')
 def nonexist():
     return render_template('nonexist.html')
-    
+
 @app.route('/showAll')
 def showAll():
     breweries = Brewery.query.all()

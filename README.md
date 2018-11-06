@@ -15,7 +15,7 @@ http://localhost:5000/ -> base.html —- Home Page
 
 http://localhost:5000/addNew -> addNew.html —- Page for users to enter a name and brewery. On Submit, it brings the user to either brew.html or nonexist.html
 
-http://localhost:5000/nonExist -> nonexist.html —- Page that appears when users enter a brewery that is not in the API. This page only appears if a invalid input is presented
+http://localhost:5000/nonExist -> nonexist.html —- Page that appears when users enter a brewery that is not in the API. This page only appears if an invalid input is presented
 
 http://localhost:5000/giveAdvice -> advice.html —- Page that allows users to enter a suggestion of a new brewery to add to the database/api. This page redirects back to itself upon successful entry. 
 
