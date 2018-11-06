@@ -1,3 +1,5 @@
+## Brewery Finder
+
 This is an application that allows users to input their favorite Breweries.
 
 The same user can add multiple breweries. 
