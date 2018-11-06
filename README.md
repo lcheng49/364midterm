@@ -22,3 +22,5 @@ http://localhost:5000/giveAdvice -> advice.html —- Page that allows users to e
 http://localhost:5000/showAll -> name.html —- Page outputs all user and brewery combinations as well as all suggestions.
 
 http://localhost:5000/getBrew —> brew.html —- page that gives brewery info to user. Only appears when users submits brewery from addNew. If entered normally it redirects to addNew
+
+error.html —- Shows error page (404) when an invalid url is given
