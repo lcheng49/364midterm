@@ -63,7 +63,7 @@ class Advice(db.Model):
 ###################
 
 class BrewForm(FlaskForm):
-    name = StringField("Please enter your name",validators=[InputRequired()])
+    name = StringField("Please enter your name")
     brewery = StringField('Please enter a brewery', validators = [InputRequired()])
     def validate_brewery(self, field):
         if field.data[0].islower():
@@ -125,11 +125,16 @@ def brew():
                 db.session.commit()
         res = requests.get('https://api.openbrewerydb.org/breweries?by_name={}'.format(brewery_name))
         dic = json.loads(res.text)
+        if len(dic) == 0:
+            print("OH NO")
+            return redirect(url_for('nonexist'))
         return render_template('brew.html', name = name, brewname = brewery_name, state = dic[0]['state'], type = dic[0]['brewery_type'], phone = dic[0]['phone'])
 
     flash(form.errors)
     return redirect(url_for('add'))
-
+@app.route('/nonExist')
+def nonexist():
+    return render_template('nonexist.html')
 @app.route('/showAll')
 def showAll():
     breweries = Brewery.query.all()
@@ -138,7 +143,12 @@ def showAll():
         user = Name.query.filter_by(id=x.name_id).first()
         tup = (user.name, x.brewery)
         final.append(tup)
-    return render_template('name.html',full_list = final)
+    suggest = Advice.query.all()
+    sug = []
+    for x in suggest:
+        tup = (x.newbrew, x.newbrewtype, x.newbrewloc)
+        sug.append(tup)
+    return render_template('name.html',full_list = final, suggest_list = sug)
 
 @app.route('/giveAdvice')
 def advice():

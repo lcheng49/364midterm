@@ -6,7 +6,16 @@
     {{ form.brewery.label() }}{{ form.brewery() }}<br>
     {{ form.submit() }}
 </form>
-
+<p>
+	Example Breweries:
+	</p>
+	<ul>
+		<li>Bell's Brewery, Inc</li>
+		<li>Avondale Brewing Co</li>
+    <li>Band of Brothers Brewing Company</li>
+    <li>Trim Tab Brewing</li>
+    <li>Cooper Landing Brewing Company, LLC.</li>
+	</ul>
 <div>
 	{% for x in get_flashed_messages() %}
 	<b>Errors:</b><br><br>

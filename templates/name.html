@@ -8,5 +8,11 @@
     <li>{{ x[0] }} -- {{ x[1] }}</li>
 {% endfor %}
 </ul>
+<h1>List of current suggestions</h1>
 
+<ul>
+{% for x in suggest_list %}
+    <li>{{ x[0] }} -- {{ x[1] }} -- {{ x[2] }}</li>
+{% endfor %}
+</ul>
 {% endblock %}
